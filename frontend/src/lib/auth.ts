@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, apiUrl } from './api'
 
 export type LoginResult = { ok: true } | { ok: false; message: string }
 
@@ -9,7 +9,7 @@ export async function logout(): Promise<void> {
 
 export async function login(loginId: string, password: string): Promise<LoginResult> {
   try {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(apiUrl('/api/auth/login'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

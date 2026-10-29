@@ -211,6 +211,28 @@ describe('password changes', () => {
   })
 })
 
+describe('cross-origin access', () => {
+  it('lets the configured site send cookies to the API', async () => {
+    const response = await request(app)
+      .options('/api/auth/login')
+      .set('Origin', ORIGIN)
+      .set('Access-Control-Request-Method', 'POST')
+    expect(response.headers['access-control-allow-origin']).toBe(ORIGIN)
+    expect(response.headers['access-control-allow-credentials']).toBe('true')
+  })
+
+  it('never allows another site or a wildcard to read responses', async () => {
+    const response = await request(app)
+      .options('/api/auth/login')
+      .set('Origin', 'https://evil.example')
+      .set('Access-Control-Request-Method', 'POST')
+    // Browsers only allow a page whose origin equals this header, so an evil page is still blocked.
+    expect(response.headers['access-control-allow-origin']).toBe(ORIGIN)
+    expect(response.headers['access-control-allow-origin']).not.toBe('https://evil.example')
+    expect(response.headers['access-control-allow-origin']).not.toBe('*')
+  })
+})
+
 describe('status page', () => {
   it('shows that the backend is working at the root address', async () => {
     const response = await request(app).get('/')

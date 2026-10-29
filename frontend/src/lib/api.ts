@@ -10,13 +10,20 @@ interface ApiOptions {
   body?: unknown
 }
 
-const NETWORK_ERROR = "Can't reach the server. Check your connection and try again."
+// Empty in development (Vite proxies /api). In production it is the API address, for example https://api.healthsathi24.com
+const API_BASE = ((import.meta.env.VITE_API_URL as string | undefined) ?? '').replace(/\/+$/, '')
+
+export function apiUrl(path: string): string {
+  return `${API_BASE}${path}`
+}
+
+const NETWORK_ERROR ="Can't reach the server. Check your connection and try again."
 const GENERIC_ERROR = 'Something went wrong. Try again.'
 
 export async function api<T>(path: string, options: ApiOptions = {}): Promise<ApiResult<T>> {
   const hasBody = options.body !== undefined
   try {
-    const response = await fetch(path, {
+    const response = await fetch(apiUrl(path), {
       method: options.method ?? 'GET',
       credentials: 'include',
       headers: hasBody ? { 'Content-Type': 'application/json' } : undefined,

@@ -1,4 +1,5 @@
-import express, { type NextFunction, type Request, type Response } from 'express'
+import cors from 'cors'
+import express,{ type NextFunction, type Request, type Response } from 'express'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import helmet from 'helmet'
@@ -13,7 +14,9 @@ export function createApp() {
   app.disable('x-powered-by')
   if (config.NODE_ENV === 'production') app.set('trust proxy', 1)
 
-  app.use(helmet())
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-site' } }))
+  // The site and the API live on sibling subdomains (healthsathi24.com and api.healthsathi24.com).
+  app.use(cors({ origin: config.CLIENT_ORIGIN, credentials: true }))
   app.use(express.json({ limit: '10kb' }))
 
   const store = MongoStore.create({

@@ -3,7 +3,7 @@ import { Logo } from './Logo'
 
 const LINKS = [
   { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms and Conditions', href: '/terms' },
+  { label: 'Terms & Conditions', href: '/terms' },
   { label: 'Contact', href: '/contact' },
 ]
 

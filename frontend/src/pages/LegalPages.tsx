@@ -1,4 +1,6 @@
+import { LegalDocumentPage } from '../components/LegalDocument'
 import { LegalLayout, LegalSection } from '../components/LegalLayout'
+import { termsOfUse } from '../content/termsOfUse'
 
 const CONTACT_EMAIL = 'contact@healthsathi24.com'
 const UPDATED = '2 November 2026'
@@ -111,68 +113,9 @@ export function PrivacyPage() {
   )
 }
 
+// The Terms of Use are copied word for word from the Word document. See content/termsOfUse.ts.
 export function TermsPage() {
-  return (
-    <LegalLayout title="Terms and Conditions" updated={UPDATED}>
-      <LegalSection title="Using HealthSathi24">
-        <p>
-          By using the site you agree to these terms. HealthSathi24 accounts are created by our team. There is no public
-          sign-up. Your login is for you alone, so please do not share it.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Education, not medical advice">
-        <p>
-          Everything on HealthSathi24 is general health information for learning. It is not medical advice and does not
-          replace a qualified health professional. It cannot diagnose, treat or prevent any condition, and it does not
-          promise any health result.
-        </p>
-        <p>
-          Please talk to a qualified health professional about your own situation. If you think you or someone else may be
-          having a medical emergency, call your local emergency number (112 in India) or go to the nearest hospital. Do not
-          wait for a lesson or a reply from us.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Fair use">
-        <p>Please do not:</p>
-        <ul className="list-disc space-y-2 pl-6 marker:text-leaf">
-          <li>share your login or let others use your account;</li>
-          <li>copy, record or republish our lessons and notes without our written permission;</li>
-          <li>try to break into, overload or disrupt the site.</li>
-        </ul>
-        <p>We may suspend or delete an account that is misused.</p>
-      </LegalSection>
-
-      <LegalSection title="Our content and third-party videos">
-        <p>
-          The notes, design and text on this site belong to HealthSathi24 or the people who license them to us. Videos are
-          played from YouTube and remain the property of their owners.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Availability">
-        <p>
-          We work to keep the site available, but we cannot promise it will always be uninterrupted or error-free. We may
-          change, add or remove lessons at any time.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Our responsibility">
-        <p>
-          To the extent the law allows, HealthSathi24 is not responsible for decisions you make based on the lessons, or for
-          losses that result from using the site. Nothing here limits any right you have that cannot be limited by law.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Changes and contact">
-        <p>
-          We may update these terms and will change the date at the top when we do. Questions? Email <Email />. These terms
-          are governed by the laws of India.
-        </p>
-      </LegalSection>
-    </LegalLayout>
-  )
+  return <LegalDocumentPage pageTitle="Terms of Use" blocks={termsOfUse} />
 }
 
 export function ContactPage() {

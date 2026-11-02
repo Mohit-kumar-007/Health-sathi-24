@@ -59,56 +59,65 @@ function Courses({ displayName }: { displayName: string }) {
         <h1 className="text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">Hello, {displayName}</h1>
         <p className="mt-2 text-lg text-ink-soft">Pick a topic to see its courses.</p>
 
-        {categories.length > 0 && (
-          <div role="group" aria-label="Topics" className="mt-8 flex flex-wrap gap-3">
-            {categories.map((category) => {
-              const isSelected = category.slug === selectedSlug
-              return (
-                <button
-                  key={category.id}
-                  type="button"
-                  aria-pressed={isSelected}
-                  onClick={() => setSelectedSlug(category.slug)}
-                  className={`rounded-full border-2 px-5 py-2.5 text-sm font-bold transition ${
-                    isSelected
-                      ? 'border-primary bg-primary text-white'
-                      : 'border-pale bg-white text-navy hover:border-sage'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              )
-            })}
+        <div className="mt-8 lg:grid lg:grid-cols-[15rem_1fr] lg:gap-8">
+          {/* A row of buttons on phones; a column down the left side on larger screens. */}
+          {categories.length > 0 && (
+            <div
+              role="group"
+              aria-label="Topics"
+              className="flex flex-wrap gap-3 lg:sticky lg:top-6 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:self-start lg:rounded-2xl lg:border lg:border-pale lg:bg-white lg:p-3"
+            >
+              {categories.map((category) => {
+                const isSelected = category.slug === selectedSlug
+                return (
+                  <button
+                    key={category.id}
+                    type="button"
+                    aria-pressed={isSelected}
+                    onClick={() => setSelectedSlug(category.slug)}
+                    className={`rounded-full border-2 px-5 py-2.5 text-sm font-bold transition lg:w-full lg:rounded-xl lg:border-0 lg:px-4 lg:py-3 lg:text-left ${
+                      isSelected
+                        ? 'border-primary bg-primary text-white'
+                        : 'border-pale bg-white text-navy hover:border-sage lg:hover:bg-pale/60'
+                    }`}
+                  >
+                    {category.name}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+
+          <div className="mt-4 min-w-0 lg:mt-0">
+            {selected && <p className="text-ink-soft">{selected.description}</p>}
+
+            <div role="alert">
+              {error && <p className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">{error}</p>}
+            </div>
+
+            {courses === null && selectedSlug && !error && <p className="mt-8 text-ink-soft">Loading courses…</p>}
+            {courses?.length === 0 && <p className="mt-8 text-ink-soft">No courses in this topic yet.</p>}
+            {selected && courses && courses.length > 0 && (
+              <ul className="mt-6 grid gap-6 sm:grid-cols-2">
+                {courses.map((course) => (
+                  <li key={course.id} className="flex">
+                    <div className="flex w-full">
+                      <CourseCard
+                        course={course}
+                        iconKey={selected.iconKey}
+                        categoryName={selected.name}
+                        completedCount={completedByCourse.get(course.id) ?? 0}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {!error && categories.length === 0 && selectedSlug === '' && courses === null && (
+              <p className="mt-8 text-ink-soft">Topics will appear here once they are added.</p>
+            )}
           </div>
-        )}
-
-        {selected && <p className="mt-4 text-ink-soft">{selected.description}</p>}
-
-        <div role="alert">
-          {error && <p className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">{error}</p>}
         </div>
-
-        {courses === null && selectedSlug && !error && <p className="mt-8 text-ink-soft">Loading courses…</p>}
-        {courses?.length === 0 && <p className="mt-8 text-ink-soft">No courses in this topic yet.</p>}
-        {selected && courses && courses.length > 0 && (
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((course) => (
-              <li key={course.id} className="flex">
-                <div className="flex w-full">
-                  <CourseCard
-                    course={course}
-                    iconKey={selected.iconKey}
-                    categoryName={selected.name}
-                    completedCount={completedByCourse.get(course.id) ?? 0}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-        {!error && categories.length === 0 && selectedSlug === '' && courses === null && (
-          <p className="mt-8 text-ink-soft">Topics will appear here once they are added.</p>
-        )}
       </main>
     </div>
   )

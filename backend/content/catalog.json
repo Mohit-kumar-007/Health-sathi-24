@@ -1,0 +1,163 @@
+{
+  "categories": [
+    {
+      "name": "Health Prevention",
+      "slug": "health-prevention",
+      "iconKey": "prevention",
+      "description": "Understand the basics of staying ahead with awareness and regular check-ins."
+    },
+    {
+      "name": "Body Care",
+      "slug": "body-care",
+      "iconKey": "body",
+      "description": "Gentle everyday care for your back, skin, hair, teeth and hydration."
+    },
+    {
+      "name": "Mental Health",
+      "slug": "mental-health",
+      "iconKey": "mind",
+      "description": "Learn to notice stress and rest, and build calmer routines."
+    },
+    {
+      "name": "Everyday Activities",
+      "slug": "everyday-activities",
+      "iconKey": "daily",
+      "description": "Simple habits around food, movement and routine that fit real life."
+    }
+  ],
+  "courses": [
+    {
+      "slug": "blood-pressure-prevention",
+      "title": "Blood Pressure Prevention",
+      "categorySlug": "health-prevention",
+      "description": "Learn what blood pressure numbers mean, who is at risk, and the everyday habits that help protect your heart.",
+      "sortOrder": 10
+    },
+    {
+      "slug": "diabetes-prevention",
+      "title": "Diabetes Prevention",
+      "categorySlug": "health-prevention",
+      "description": "Understand how diabetes develops, the warning signs to notice, and daily habits that help lower your risk.",
+      "sortOrder": 20
+    },
+    {
+      "slug": "health-checkup-essentials",
+      "title": "Health Checkup Essentials",
+      "categorySlug": "health-prevention",
+      "description": "Find out why preventive checkups matter, which common tests exist, and how to plan visits that suit you.",
+      "sortOrder": 30
+    },
+    {
+      "slug": "strong-immunity",
+      "title": "Strong Immunity",
+      "categorySlug": "health-prevention",
+      "description": "See how your immune system works and how food, heat, air, insects and daily habits can support or strain it.",
+      "sortOrder": 40
+    },
+    {
+      "slug": "make-allergy-season-easier",
+      "title": "Make Allergy Season Easier",
+      "categorySlug": "health-prevention",
+      "description": "Learn to spot your own allergy pattern and plan simple steps for the days when symptoms flare up.",
+      "sortOrder": 50
+    },
+    {
+      "slug": "healthy-liver-habits",
+      "title": "Healthy Liver Habits",
+      "categorySlug": "health-prevention",
+      "description": "Look at the everyday patterns that can add to or ease your liver's workload, and when to seek advice.",
+      "sortOrder": 60
+    },
+    {
+      "slug": "break-free-from-smoking",
+      "title": "Break Free From Smoking",
+      "categorySlug": "health-prevention",
+      "description": "Understand how tobacco dependence works and take small, steady steps toward a tobacco-free life.",
+      "sortOrder": 70
+    },
+    {
+      "slug": "everyday-back-care",
+      "title": "Everyday Back Care",
+      "categorySlug": "body-care",
+      "description": "A short, gentle movement practice to release tension and keep your back and spine mobile.",
+      "sortOrder": 80
+    },
+    {
+      "slug": "healthy-feet",
+      "title": "Healthy Feet",
+      "categorySlug": "body-care",
+      "description": "Simple foot care habits for skin, nails, footwear and movement, and the signs that need attention.",
+      "sortOrder": 90
+    },
+    {
+      "slug": "healthy-hair",
+      "title": "Healthy Hair",
+      "categorySlug": "body-care",
+      "description": "Gentle, realistic hair care: washing, protecting and nourishing your hair and scalp.",
+      "sortOrder": 100
+    },
+    {
+      "slug": "understanding-skin-aging",
+      "title": "Understanding Skin Aging",
+      "categorySlug": "body-care",
+      "description": "How skin ages, what speeds it up, and a simple, steady routine to look after your skin over time.",
+      "sortOrder": 110
+    },
+    {
+      "slug": "healthy-teeth",
+      "title": "Healthy Teeth",
+      "categorySlug": "body-care",
+      "description": "Daily dental care, smarter tools, food and enamel, healthy gums, and when to see a dentist.",
+      "sortOrder": 120
+    },
+    {
+      "slug": "healthy-hydration",
+      "title": "Healthy Hydration",
+      "categorySlug": "body-care",
+      "description": "Why water matters, how to spot low fluid intake, and easy ways to make hydration a habit.",
+      "sortOrder": 130
+    },
+    {
+      "slug": "understand-your-cycle",
+      "title": "Understand Your Cycle",
+      "categorySlug": "body-care",
+      "description": "A gentle introduction to tracking your menstrual cycle and caring for yourself through it.",
+      "sortOrder": 140
+    },
+    {
+      "slug": "sleep-balance",
+      "title": "Sleep Balance",
+      "categorySlug": "mental-health",
+      "description": "Explore why more sleep isn't always better, and how light, movement and routine support real rest.",
+      "sortOrder": 150
+    },
+    {
+      "slug": "understanding-your-emotions",
+      "title": "Understanding Your Emotions",
+      "categorySlug": "mental-health",
+      "description": "Learn to notice and name emotions and choose a response that causes less harm.",
+      "sortOrder": 160
+    },
+    {
+      "slug": "dont-let-anxiety-decide",
+      "title": "Don’t Let Anxiety Decide",
+      "categorySlug": "mental-health",
+      "description": "Practical ways to notice anxiety early, tell facts from predictions, and break the worry cycle.",
+      "sortOrder": 170
+    },
+    {
+      "slug": "how-other-peoples-expectations-shape-your-decisions",
+      "title": "How Other People’s Expectations Shape Your Decisions",
+      "categorySlug": "mental-health",
+      "description": "Notice when a choice isn't really yours, and practise making small, honest decisions for yourself.",
+      "sortOrder": 180
+    },
+    {
+      "slug": "healthy-eating",
+      "title": "Healthy Eating",
+      "categorySlug": "everyday-activities",
+      "description": "Build simple, lasting eating habits around balanced plates, steady energy and real-life routines.",
+      "sortOrder": 190
+    }
+  ]
+}

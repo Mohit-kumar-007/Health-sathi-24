@@ -1,9 +1,10 @@
+import { Link } from '../lib/router'
 import { Logo } from './Logo'
 
 const LINKS = [
   { label: 'Privacy Policy', href: '/privacy' },
   { label: 'Terms and Conditions', href: '/terms' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function Footer() {
@@ -19,9 +20,9 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm">
               {LINKS.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-white/85 hover:text-white hover:underline">
+                  <Link to={link.href} className="text-white/85 hover:text-white hover:underline">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li className="text-white/75">Email: contact@healthsathi24.com</li>

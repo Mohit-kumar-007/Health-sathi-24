@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 .data
+# Lesson text imported from documents. Kept out of git until the source and permission are confirmed.
+content/lessons/

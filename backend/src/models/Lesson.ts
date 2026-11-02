@@ -3,7 +3,7 @@ import { CONTENT_STATUSES, type ContentStatus } from './Course'
 
 export interface ILesson {
   courseId: Types.ObjectId
-  chapterId: Types.ObjectId
+  chapterId?: Types.ObjectId
   title: string
   summary?: string
   youtubeVideoId?: string
@@ -19,7 +19,8 @@ export interface ILesson {
 const lessonSchema = new Schema<ILesson>(
   {
     courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
-    chapterId: { type: Schema.Types.ObjectId, ref: 'Chapter', required: true },
+    // Optional: most courses are a flat list of lessons, with no chapters.
+    chapterId: { type: Schema.Types.ObjectId, ref: 'Chapter' },
     title: { type: String, required: true, trim: true, maxlength: 150 },
     summary: { type: String, trim: true, maxlength: 500 },
     // A bare video ID, never a URL: the admin form will extract it so the player only embeds known-shaped IDs.

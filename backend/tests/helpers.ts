@@ -17,10 +17,11 @@ export async function startTestApp() {
   const { Course } = await import('../src/models/Course')
   const { Chapter } = await import('../src/models/Chapter')
   const { Lesson } = await import('../src/models/Lesson')
+  const { Progress } = await import('../src/models/Progress')
   const { hashPassword } = await import('../src/lib/password')
   const { createApp } = await import('../src/app')
 
-  const models = { User, Category, Course, Chapter, Lesson }
+  const models = { User, Category, Course, Chapter, Lesson, Progress }
   await Promise.all(Object.values(models).map((model) => model.init()))
   const created = createApp()
 
@@ -35,6 +36,7 @@ export async function startTestApp() {
         Course.deleteMany({}),
         Chapter.deleteMany({}),
         Lesson.deleteMany({}),
+        Progress.deleteMany({}),
       ])
       await mongoose.connection.collection('sessions').deleteMany({})
     },

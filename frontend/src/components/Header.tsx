@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { Logo } from './Logo'
 
 const NAV = [
-  { label: 'Home', href: '#home' },
-  { label: 'Topics', href: '#topics' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'Topics', href: '/#topics' },
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
@@ -14,7 +14,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-pale bg-ivory/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#home" aria-label="HealthSathi24 home">
+        <a href="/#home" aria-label="HealthSathi24 home">
           <Logo />
         </a>
 

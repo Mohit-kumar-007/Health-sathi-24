@@ -3,6 +3,7 @@ import { isValidObjectId } from 'mongoose'
 import { z } from 'zod'
 import { generatePassword, hashPassword } from '../lib/password'
 import { requireAdmin, requireAuth } from '../middleware/auth'
+import { Progress } from '../models/Progress'
 import { User, toPublicUser } from '../models/User'
 
 interface AdminUsersDeps {
@@ -98,6 +99,7 @@ export function createAdminUsersRouter({ destroyUserSessions }: AdminUsersDeps):
     if (!user) return res.status(404).json({ error: 'User not found.' })
     if (user.role === 'admin') return res.status(400).json({ error: "Admin accounts can't be deleted here." })
 
+    await Progress.deleteMany({ userId: user._id })
     await user.deleteOne()
     await destroyUserSessions(id)
     res.status(204).end()

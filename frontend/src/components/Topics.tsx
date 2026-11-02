@@ -12,25 +12,25 @@ const TOPICS: Topic[] = [
     kind: 'prevention',
     name: 'Health Prevention',
     text: 'Understand the basics of staying ahead with awareness and regular check-ins.',
-    courses: ['Blood Pressure Awareness', 'Diabetes Awareness', 'Checkup Basics', 'Immunity Support'],
+    courses: ['Blood Pressure Prevention', 'Diabetes Prevention', 'Health Checkup Essentials', 'Strong Immunity'],
   },
   {
     kind: 'body',
     name: 'Body Care',
     text: 'Gentle everyday care for your back, skin, hair, teeth and hydration.',
-    courses: ['Back and Mobility', 'Healthy Feet', 'Healthy Teeth', 'Healthy Hydration'],
+    courses: ['Everyday Back Care', 'Healthy Teeth', 'Healthy Hair', 'Healthy Hydration'],
   },
   {
     kind: 'mind',
     name: 'Mental Health',
     text: 'Learn to notice stress and rest, and build calmer routines.',
-    courses: ['Sleep Balance', 'Understanding Emotions', 'Anxiety Awareness', 'Everyday Stress'],
+    courses: ['Sleep Balance', 'Understanding Your Emotions', 'Don’t Let Anxiety Decide'],
   },
   {
     kind: 'daily',
     name: 'Everyday Activities',
     text: 'Simple habits around food, movement and routine that fit real life.',
-    courses: ['Healthy Eating', 'Everyday Movement', 'Healthy Routines', 'Hydration Habits'],
+    courses: ['Healthy Eating'],
   },
 ]
 
@@ -43,7 +43,7 @@ export function Topics() {
           Four areas to explore, one step at a time
         </h2>
         <p className="mt-3 max-w-2xl text-lg text-ink-soft">
-          Example courses are shown below. Log in to see the full library as it grows.
+          A few of the courses inside. Log in to see them all.
         </p>
 
         <ul className="mt-10 grid gap-6 sm:grid-cols-2">

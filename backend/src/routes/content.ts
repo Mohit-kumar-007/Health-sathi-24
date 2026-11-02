@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import type { Types } from 'mongoose'
+import { isValidObjectId, type Types } from 'mongoose'
 import { z } from 'zod'
+import { findVisibleCourse, findVisibleLesson } from '../lib/visibility'
 import { requireAuth } from '../middleware/auth'
 import { Category } from '../models/Category'
 import { Course } from '../models/Course'
@@ -53,5 +54,45 @@ contentRouter.get('/courses', requireAuth, async (req, res) => {
       categoryId: String(course.categoryId),
       lessonCount: lessonCounts.get(course.id as string) ?? 0,
     })),
+  })
+})
+
+// The course page: its published lessons in order, without the notes (those load one lesson at a time).
+contentRouter.get('/courses/:slug', requireAuth, async (req, res) => {
+  const found = await findVisibleCourse(String(req.params.slug))
+  if (!found) return res.status(404).json({ error: 'Course not found.' })
+
+  const lessons = await Lesson.find({ courseId: found.course._id, status: 'published' }).sort({ sortOrder: 1, _id: 1 })
+  res.json({
+    course: {
+      id: found.course.id as string,
+      title: found.course.title,
+      slug: found.course.slug,
+      description: found.course.description,
+      category: {
+        name: found.category.name,
+        slug: found.category.slug,
+        iconKey: found.category.iconKey,
+      },
+    },
+    lessons: lessons.map((lesson) => ({ id: lesson.id as string, title: lesson.title })),
+  })
+})
+
+contentRouter.get('/lessons/:id', requireAuth, async (req, res) => {
+  const lessonId = String(req.params.id)
+  if (!isValidObjectId(lessonId)) return res.status(400).json({ error: 'Invalid lesson.' })
+  const found = await findVisibleLesson(lessonId)
+  if (!found) return res.status(404).json({ error: 'Lesson not found.' })
+
+  res.json({
+    lesson: {
+      id: found.lesson.id as string,
+      title: found.lesson.title,
+      notes: found.lesson.notes,
+      youtubeVideoId: found.lesson.youtubeVideoId ?? null,
+      courseId: found.course.id as string,
+      courseSlug: found.course.slug,
+    },
   })
 })

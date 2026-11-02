@@ -7,7 +7,9 @@ import { config } from './config'
 import { SESSION_IDLE_MS, requireSameOrigin } from './middleware/auth'
 import { authRouter } from './routes/auth'
 import { createAdminUsersRouter } from './routes/adminUsers'
+import { adminContentRouter } from './routes/adminContent'
 import { contentRouter } from './routes/content'
+import { progressRouter } from './routes/progress'
 
 export function createApp() {
   const app = express()
@@ -17,7 +19,8 @@ export function createApp() {
   app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-site' } }))
   // The site and the API live on sibling subdomains (healthsathi24.com and api.healthsathi24.com).
   app.use(cors({ origin: config.CLIENT_ORIGIN, credentials: true }))
-  app.use(express.json({ limit: '10kb' }))
+  // Lesson notes can be 20,000 characters, and Hindi text takes up to 3 bytes per character.
+  app.use(express.json({ limit: '100kb' }))
 
   const store = MongoStore.create({
     mongoUrl: config.MONGODB_URI,
@@ -68,6 +71,8 @@ export function createApp() {
   app.use('/api', requireSameOrigin)
   app.use('/api/auth', authRouter)
   app.use('/api/admin/users', createAdminUsersRouter({ destroyUserSessions }))
+  app.use('/api/admin', adminContentRouter)
+  app.use('/api/progress', progressRouter)
   app.use('/api', contentRouter)
 
   app.use('/api', (_req, res) => {
@@ -76,6 +81,7 @@ export function createApp() {
 
   app.use((error: { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
     if (error.status === 400) return res.status(400).json({ error: 'Invalid request.' })
+    if (error.status === 413) return res.status(413).json({ error: 'That is too large to save.' })
     console.error('Unhandled error:', error)
     res.status(500).json({ error: 'Something went wrong.' })
   })

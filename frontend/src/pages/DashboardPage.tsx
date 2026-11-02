@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CourseCard } from '../components/CourseCard'
 import { LearnerHeader } from '../components/LearnerHeader'
-import { listCategories, listCourses, type Category, type Course } from '../lib/content'
+import { listCategories, listCourses, listProgress, type Category, type Course } from '../lib/content'
 import { useCurrentUser } from '../lib/useCurrentUser'
 
 function redirectIfSignedOut(status: number): boolean {
@@ -15,6 +15,16 @@ function Courses({ displayName }: { displayName: string }) {
   const [selectedSlug, setSelectedSlug] = useState('')
   const [courses, setCourses] = useState<Course[] | null>(null)
   const [error, setError] = useState('')
+  const [completedByCourse, setCompletedByCourse] = useState<Map<string, number>>(new Map())
+
+  useEffect(() => {
+    listProgress().then((result) => {
+      if (redirectIfSignedOut(result.status) || !result.ok || !result.data) return
+      const counts = new Map<string, number>()
+      for (const item of result.data.completed) counts.set(item.courseId, (counts.get(item.courseId) ?? 0) + 1)
+      setCompletedByCourse(counts)
+    })
+  }, [])
 
   useEffect(() => {
     listCategories().then((result) => {
@@ -85,7 +95,12 @@ function Courses({ displayName }: { displayName: string }) {
             {courses.map((course) => (
               <li key={course.id} className="flex">
                 <div className="flex w-full">
-                  <CourseCard course={course} iconKey={selected.iconKey} categoryName={selected.name} />
+                  <CourseCard
+                    course={course}
+                    iconKey={selected.iconKey}
+                    categoryName={selected.name}
+                    completedCount={completedByCourse.get(course.id) ?? 0}
+                  />
                 </div>
               </li>
             ))}

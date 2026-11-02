@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { CreateUserForm } from '../components/CreateUserForm'
 import { CredentialsNotice } from '../components/CredentialsNotice'
-import { Logo } from '../components/Logo'
-import { logout } from '../lib/auth'
+import { AdminLayout } from '../components/AdminLayout'
 import { useCurrentUser } from '../lib/useCurrentUser'
 import { PAGE_SIZE, deleteUser, listUsers, resetPassword, type PublicUser, type UserList } from '../lib/users'
 
@@ -100,36 +99,7 @@ export default function AdminUsersPage() {
   const totalPages = list ? Math.max(1, Math.ceil(list.total / PAGE_SIZE)) : 1
 
   return (
-    <div className="min-h-screen md:grid md:grid-cols-[16rem_1fr]">
-      <aside className="flex flex-col justify-between gap-6 bg-navy p-5 text-white md:min-h-screen">
-        <div>
-          <a href="/" aria-label="HealthSathi24 home">
-            <Logo light />
-          </a>
-          <nav aria-label="Admin navigation" className="mt-8">
-            <a
-              href="/admin/users"
-              aria-current="page"
-              className="block rounded-xl bg-white/10 px-4 py-2.5 text-sm font-bold text-white"
-            >
-              Users
-            </a>
-          </nav>
-        </div>
-        <div>
-          <p className="text-sm text-white/70">Signed in as</p>
-          <p className="font-bold">{current.user.displayName}</p>
-          <button
-            type="button"
-            onClick={logout}
-            className="mt-3 rounded-full border-2 border-white/30 px-5 py-2 text-sm font-bold text-white hover:border-white/60"
-          >
-            Logout
-          </button>
-        </div>
-      </aside>
-
-      <main className="space-y-6 bg-ivory p-4 sm:p-8">
+    <AdminLayout displayName={current.user.displayName} active="users">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight text-navy">Users</h1>
           <p className="mt-1 text-ink-soft">Create learner accounts, reset passwords and remove access.</p>
@@ -242,7 +212,6 @@ export default function AdminUsersPage() {
             </nav>
           )}
         </section>
-      </main>
-    </div>
+    </AdminLayout>
   )
 }
